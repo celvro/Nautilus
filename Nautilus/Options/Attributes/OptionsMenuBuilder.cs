@@ -120,9 +120,12 @@ internal class OptionsMenuBuilder<T> : ModOptions where T : ConfigFile, new()
                 ModOptionAttributeMetadata<T> modOptionMetadata = entry.Value;
 
                 string label = modOptionMetadata.ModOptionAttribute.Label;
-                if(Language.main.TryGet(modOptionMetadata.ModOptionAttribute.LabelLanguageId, out string languageLabel))
+                string labelLanguageId = modOptionMetadata.ModOptionAttribute.LabelLanguageId;
+                if(!string.IsNullOrEmpty(labelLanguageId) && Language.main.TryGet(labelLanguageId, out _))
                 {
-                    label = languageLabel;
+                    // Pass the language id itself, not the translated text. The option widgets use their label as the
+                    // TranslationLiveUpdate key, so the id is what lets the label re-translate when the language changes.
+                    label = labelLanguageId;
                 }
 
                 InternalLogger.Debug($"[{ConfigFileMetadata.ModName}] [{typeof(T).Name}] {modOptionMetadata.MemberInfoMetadata.Name}: " +

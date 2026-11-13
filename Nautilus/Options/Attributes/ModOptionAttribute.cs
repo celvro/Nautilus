@@ -39,7 +39,8 @@ public abstract class ModOptionAttribute : Attribute
 
     /// <summary>
     /// An optional id to be parsed with <see cref="Language.Get(string)"/> for the label, allowing for custom language-based strings
-    /// via the <see cref="LanguageHandler"/> API. If this is set, it will take precedence.
+    /// via the <see cref="LanguageHandler"/> API. If this is set, it will take precedence. The label updates live when the
+    /// game language is changed.
     /// </summary>
     /// <seealso cref="LanguageHandler.SetLanguageLine(string, string, string)"/>
     /// <seealso cref="Language.Get(string)"/>
